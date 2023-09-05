@@ -23,13 +23,18 @@ const closeMapInfo = (btn) => {
   }
 };
 
+const closeAllBtn = (btn = null) => {
+  mapBtns.forEach((mapBtn)=> {
+    if(btn !== mapBtn) closeMapInfo(mapBtn)
+  })
+}
+
 infoBtns.addEventListener('click', function (e) {
   const { target } = e;
   const btn = target.closest('.map-btn');
+  if(target === infoBtns) closeAllBtn()
   if(btn){
-    mapBtns.forEach((mapBtn)=> {
-      if(btn !== mapBtn) closeMapInfo(mapBtn)
-    })
+    closeAllBtn(btn)
     const isOpenBtn = btn.classList.contains('active');
     if (!isOpenBtn) {
       showMapInfo(btn);
@@ -39,3 +44,5 @@ infoBtns.addEventListener('click', function (e) {
   }
 
 });
+
+
